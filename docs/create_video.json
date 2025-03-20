@@ -1,0 +1,18 @@
+{
+	"script": "**Scene 1** (0-10 sec):\n**Visual:** A futuristic calendar flipping to 2025 with digital patterns.\n**Narrator:**\n\"AI is evolving rapidly! Here are 3 game-changing AI trends to watch in 2024.\"\n\n**Scene 2** (10-25 sec):\n**Visual:** Text: \u201cTrend #1: Generative AI Everywhere.\u201d Show tools like ChatGPT and MidJourney.\n**Narrator:**\n\"Generative AI is dominating industries\u2014creating content, images, and even coding for businesses worldwide.\"\n\n**Scene 3** (25-40 sec):\n**Visual:** Text: \u201cTrend #2: AI-Powered Automation.\u201d Show factories and office automation.\n**Narrator:**\n\"Automation is reaching new heights with AI running operations, supply chains, and customer service efficiently.\"\n\n**Scene 4** (40-55 sec):\n**Visual:** Text: \u201cTrend #3: Ethical AI.\u201d Show diverse people working with AI in harmony.\n**Narrator:**\n\"2024 will focus on ethical AI, ensuring fairness, accountability, and transparency in AI-driven decisions.\"\n\n**Scene 5** (55-70 sec):\n**Visual:** The text \u201cFutureLens Analytics\u201d with a call-to-action button.\n**Narrator:**\n\"Stay ahead of the trends! Subscribe to *FutureLens Analytics* and prepare for the future of AI.\"",
+	"target_video": {
+      "aspect_ratio": "9:16",
+      "video_pace": "slow"
+  },
+  "footage_options": {
+    "use_private_stocks": false,
+    "use_free_stocks": true,
+    "use_premium_stocks": false,
+    "use_premium_stocks_getty": false,
+    "stock_footage_tags": ["San Francisco", "ChatGPT"]
+  },
+  "bgm_options": {
+    "use_free_stocks": false,
+    "use_premium_stocks": true
+  }
+}
