@@ -25,15 +25,6 @@ class APIClient:
 
         api_headers = {"Content-Type": "application/json; charset=utf-8", "key":  self.api_key, "ts": f'{ts}', "nonce": str(nonce), "sign": f'{signature}'}
         return api_headers
-
-    # def sign_request(self, params):
-    #     params["timestamp"] = int(time.time() * 1000)
-    #     sorted_params = "&".join(f"{k}={v}" for k, v in sorted(params.items()))
-    #     signature = hmac.new(
-    #         self.api_secret.encode(), sorted_params.encode(), hashlib.sha256
-    #     ).hexdigest()
-    #     params["signature"] = signature
-    #     return params
     
     # Common GET APIs
     def get(self, endpoint, params=None):

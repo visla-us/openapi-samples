@@ -12,70 +12,12 @@ tags:
   - name: Visla Open Api
     description: Open Api Clip Controller
 paths:
-  '/openapi/clip/{clipUuid}/extract':
-    post:
-      tags:
-        - Visla Open Api
-      summary: Extract from original clip
-      operationId: extractClipUsingPOST_1
-      consumes:
-        - application/json
-      produces:
-        - '*/*'
-      parameters:
-        - name: clipUuid
-          in: path
-          description: clip uuid
-          required: true
-          type: string
-        - name: key
-          in: header
-          description: api key
-          required: true
-          type: string
-        - name: nonce
-          in: header
-          description: nonce
-          required: false
-          type: string
-          default: whatever
-        - in: body
-          name: reqBody
-          description: reqBody
-          required: true
-          schema:
-            $ref: '#/definitions/ExtractAndMergeClipReqBody'
-        - name: sign
-          in: header
-          description: sign
-          required: true
-          type: string
-          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
-        - name: ts
-          in: header
-          description: timestamp
-          required: true
-          type: string
-          default: '1742459291139'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Result«List«ClipInfoVo»»'
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-  '/openapi/clip/{clipUuid}/get-download-link':
+  /openapi/v1/clip/{clipUuid}/get-download-link:
     get:
       tags:
         - Visla Open Api
       summary: get clip download link
-      operationId: getClipDownloadLinkUsingGET_1
+      operationId: getClipDownloadLinkUsingGET_3
       produces:
         - '*/*'
       parameters:
@@ -111,7 +53,7 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
@@ -123,12 +65,12 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/clip/{clipUuid}/info':
+  /openapi/v1/clip/{clipUuid}/info:
     get:
       tags:
         - Visla Open Api
       summary: get clip info
-      operationId: getClipUsingGET_1
+      operationId: getClipUsingGET_3
       produces:
         - '*/*'
       parameters:
@@ -159,24 +101,24 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«ClipInfoVo»'
+            $ref: '#/definitions/Result«OpenClipVo»'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/clip/{clipUuid}/transcript':
+  /openapi/v1/clip/{clipUuid}/transcript:
     get:
       tags:
         - Visla Open Api
       summary: get clip transcript
-      operationId: getClipTranscriptUsingGET_1
+      operationId: getClipTranscriptUsingGET_3
       produces:
         - '*/*'
       parameters:
@@ -207,7 +149,7 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
@@ -219,69 +161,13 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-    put:
-      tags:
-        - Visla Open Api
-      summary: Update clip transcript
-      operationId: updateClipTranscriptUsingPUT_1
-      consumes:
-        - application/json
-      produces:
-        - '*/*'
-      parameters:
-        - name: clipUuid
-          in: path
-          description: clip uuid
-          required: true
-          type: string
-        - name: key
-          in: header
-          description: api key
-          required: true
-          type: string
-        - name: nonce
-          in: header
-          description: nonce
-          required: false
-          type: string
-          default: whatever
-        - in: body
-          name: reqBody
-          description: reqBody
-          required: true
-          schema:
-            $ref: '#/definitions/OpenapiUpdateClipTranscriptReqBody'
-        - name: sign
-          in: header
-          description: sign
-          required: true
-          type: string
-          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
-        - name: ts
-          in: header
-          description: timestamp
-          required: true
-          type: string
-          default: '1742459291139'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Result«ClipTranscriptVo»'
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-  '/openapi/folder/{folderUuid}/add-clip':
+      deprecated: true
+  /openapi/v1/folder/{folderUuid}/add-clip:
     post:
       tags:
         - Visla Open Api
       summary: add new clip to folder
-      operationId: addClipUsingPOST_1
+      operationId: addClipUsingPOST_3
       consumes:
         - application/json
       produces:
@@ -308,7 +194,7 @@ paths:
           description: reqBody
           required: true
           schema:
-            $ref: '#/definitions/NewClipReqBody'
+            $ref: '#/definitions/OpenAddClipToSpaceReqBody'
         - name: sign
           in: header
           description: sign
@@ -320,12 +206,12 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«ClipInfoVo»'
+            $ref: '#/definitions/Result«OpenClipVo»'
         '201':
           description: Created
         '401':
@@ -334,25 +220,15 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/folder/{folderUuid}/list-clip':
+  /openapi/v1/folder/{folderUuid}/list-clip:
     get:
       tags:
         - Visla Open Api
       summary: list clips in folder
-      operationId: listClipUsingGET_3
+      operationId: listClipUsingGET_5
       produces:
         - '*/*'
       parameters:
-        - name: filterBy
-          in: query
-          description: 'FilterBy,viewer/contributor can''t set pending'
-          required: false
-          type: string
-          enum:
-            - all
-            - approved
-            - my_own_clips
-            - pending
         - name: folderUuid
           in: path
           description: folder uuid
@@ -365,7 +241,7 @@ paths:
           type: string
         - name: limit
           in: query
-          description: 'The optional page size limit,default=2000,max=2000'
+          description: The optional page size limit,default=2000,max=2000
           required: false
           type: integer
           maximum: 2000
@@ -398,7 +274,7 @@ paths:
           default: whatever
         - name: offset
           in: query
-          description: 'The optional page offset, the default value is 0.'
+          description: The optional page offset, the default value is 0.
           required: false
           type: integer
           minimum: 0
@@ -413,7 +289,7 @@ paths:
           default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
         - name: sortBy
           in: query
-          description: 'The optional Sort orders, ie. name:asc,createdAt:desc'
+          description: The optional Sort orders, ie. name:asc,createdAt:desc
           required: false
           type: array
           items:
@@ -424,131 +300,151 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«PageData«ClipInfoVo»»'
+            $ref: '#/definitions/Result«PageData«OpenClipVo»»'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  /openapi/project/create-video-by-url:
+  /openapi/v1/folder/{folderUuid}/list-project:
+    get:
+      tags:
+        - Visla Open Api
+      summary: list projects in folder
+      operationId: listProjectUsingGET_2
+      produces:
+        - '*/*'
+      parameters:
+        - name: folderUuid
+          in: path
+          description: folder uuid
+          required: true
+          type: string
+        - name: key
+          in: header
+          description: api key
+          required: true
+          type: string
+        - name: limit
+          in: query
+          description: The optional page size limit,default=2000,max=2000
+          required: false
+          type: integer
+          maximum: 2000
+          exclusiveMaximum: false
+          format: int32
+          x-example: 10
+        - name: nonce
+          in: header
+          description: nonce
+          required: false
+          type: string
+          default: whatever
+        - name: offset
+          in: query
+          description: The optional page offset, the default value is 0.
+          required: false
+          type: integer
+          minimum: 0
+          exclusiveMinimum: false
+          format: int32
+          x-example: 0
+        - name: sign
+          in: header
+          description: sign
+          required: true
+          type: string
+          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
+        - name: sortBy
+          in: query
+          description: The optional Sort orders, ie. name:asc,createdAt:desc
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: ts
+          in: header
+          description: timestamp
+          required: true
+          type: string
+          default: '1745911132465'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Result«PageData«OpenAgentProjectVo»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /openapi/v1/project/add-audio-project:
+    post:
+      tags:
+        - Visla Open Api
+      summary: add a blank audio(audio-to-video) project
+      operationId: addAgentProjectToTeamspaceUsingPOST_3
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: key
+          in: header
+          description: api key
+          required: true
+          type: string
+        - name: nonce
+          in: header
+          description: nonce
+          required: false
+          type: string
+          default: whatever
+        - in: body
+          name: reqBody
+          description: add project request body
+          required: true
+          schema:
+            $ref: '#/definitions/OpenApiScriptToVideoReqBody'
+        - name: sign
+          in: header
+          description: sign
+          required: true
+          type: string
+          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
+        - name: ts
+          in: header
+          description: timestamp
+          required: true
+          type: string
+          default: '1745911132465'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Result«OpenAgentProjectVo»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /openapi/v1/project/create-video-by-url:
     post:
       tags:
         - Visla Open Api
       summary: Create a blog-2-video project by url
-      operationId: createVideoByUrlUsingPOST_2
-      consumes:
-        - application/json
-      produces:
-        - '*/*'
-      parameters:
-        - name: key
-          in: header
-          description: api key
-          required: true
-          type: string
-        - name: nonce
-          in: header
-          description: nonce
-          required: false
-          type: string
-          default: whatever
-        - in: body
-          name: reqBody
-          description: reqBody
-          required: true
-          schema:
-            $ref: '#/definitions/OpenAiCreateVideoByUrlReqBody'
-        - name: sign
-          in: header
-          description: sign
-          required: true
-          type: string
-          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
-        - name: ts
-          in: header
-          description: timestamp
-          required: true
-          type: string
-          default: '1742459291139'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Result«ProjectVo»'
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-  /openapi/project/create-video-from-script:
-    post:
-      tags:
-        - Visla Open Api
-      summary: Create a text-2-video project from script
-      operationId: createVideoFromScriptUsingPOST_1
-      consumes:
-        - application/json
-      produces:
-        - '*/*'
-      parameters:
-        - name: key
-          in: header
-          description: api key
-          required: true
-          type: string
-        - name: nonce
-          in: header
-          description: nonce
-          required: false
-          type: string
-          default: whatever
-        - in: body
-          name: reqBody
-          description: reqBody
-          required: true
-          schema:
-            $ref: '#/definitions/OpenApiCreateVideoByScriptReqBody'
-        - name: sign
-          in: header
-          description: sign
-          required: true
-          type: string
-          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
-        - name: ts
-          in: header
-          description: timestamp
-          required: true
-          type: string
-          default: '1742459291139'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Result«ProjectVo»'
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      deprecated: true
-  /openapi/project/script-to-video:
-    post:
-      tags:
-        - Visla Open Api
-      summary: Create a video from script
-      operationId: scriptToVideoUsingPOST_2
+      operationId: createVideoByUrlUsingPOST_7
       consumes:
         - application/json
       produces:
@@ -582,12 +478,12 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«ProjectVo»'
+            $ref: '#/definitions/Result«OpenAgentProjectVo»'
         '201':
           description: Created
         '401':
@@ -596,12 +492,65 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/project/{projectUuid}/add-uploaded-asset':
+  /openapi/v1/project/script-to-video:
     post:
       tags:
         - Visla Open Api
-      summary: add the uploaded asset to project
-      operationId: addUploadedAssetUsingPOST_1
+      summary: Create a video from script
+      operationId: scriptToVideoUsingPOST_8
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: key
+          in: header
+          description: api key
+          required: true
+          type: string
+        - name: nonce
+          in: header
+          description: nonce
+          required: false
+          type: string
+          default: whatever
+        - in: body
+          name: reqBody
+          description: reqBody
+          required: true
+          schema:
+            $ref: '#/definitions/OpenApiScriptToVideoReqBody'
+        - name: sign
+          in: header
+          description: sign
+          required: true
+          type: string
+          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
+        - name: ts
+          in: header
+          description: timestamp
+          required: true
+          type: string
+          default: '1745911132465'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Result«OpenAgentProjectVo»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /openapi/v1/project/{projectUuid}/add-uploaded-media:
+    post:
+      tags:
+        - Visla Open Api
+      summary: Add the uploaded asset to project
+      operationId: addUploadedMediaUsingPOST_2
       consumes:
         - application/json
       produces:
@@ -612,7 +561,7 @@ paths:
           description: The Request Body
           required: true
           schema:
-            $ref: '#/definitions/ProjectAssetUploadReqBody'
+            $ref: '#/definitions/OpenResourceUploadReqBody'
         - name: key
           in: header
           description: api key
@@ -640,12 +589,12 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«ProjectAssetVo»'
+            $ref: '#/definitions/Result«AgentProjectMediaVo»'
         '201':
           description: Created
         '401':
@@ -654,22 +603,17 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/project/{projectUuid}/export-video':
+  /openapi/v1/project/{projectUuid}/export-video:
     post:
       tags:
         - Visla Open Api
       summary: Export project(video) as a clip to my teamspace
-      operationId: exportProjectUsingPOST_2
+      operationId: exportProjectUsingPOST_5
       consumes:
         - application/json
       produces:
         - '*/*'
       parameters:
-        - name: completion_webhook
-          in: query
-          description: export video completion webhook
-          required: false
-          type: string
         - name: key
           in: header
           description: api key
@@ -686,6 +630,12 @@ paths:
           description: project uuid
           required: true
           type: string
+        - in: body
+          name: reqBody
+          description: export video - webhooku
+          required: false
+          schema:
+            $ref: '#/definitions/OpenApiExportVideoReqBody'
         - name: sign
           in: header
           description: sign
@@ -697,12 +647,12 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«ClipInfoVo»'
+            $ref: '#/definitions/Result«OpenClipVo»'
         '201':
           description: Created
         '401':
@@ -711,12 +661,12 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/project/{projectUuid}/generate-video':
+  /openapi/v1/project/{projectUuid}/generate-video:
     post:
       tags:
         - Visla Open Api
       summary: Generate video
-      operationId: generateVideoUsingPOST_1
+      operationId: generateVideoUsingPOST_3
       consumes:
         - application/json
       produces:
@@ -733,12 +683,62 @@ paths:
           required: false
           type: string
           default: whatever
-        - in: body
-          name: projectRecommendConfVo
-          description: projectRecommendConfVo
+        - name: projectUuid
+          in: path
+          description: Project UUID
           required: true
+          type: string
+        - in: body
+          name: reqBody
+          description: reqBody
+          required: false
           schema:
-            $ref: '#/definitions/ProjectRecommendConfVo'
+            $ref: '#/definitions/OpenProjectGenerateReqBody'
+        - name: sign
+          in: header
+          description: sign
+          required: true
+          type: string
+          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
+        - name: ts
+          in: header
+          description: timestamp
+          required: true
+          type: string
+          default: '1745911132465'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Result«OpenAgentProjectVo»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /openapi/v1/project/{projectUuid}/get-consumed-credit:
+    get:
+      tags:
+        - Visla Open Api
+      summary: Get consumed credit of a project
+      operationId: getProjectConsumedCreditUsingGET_2
+      produces:
+        - '*/*'
+      parameters:
+        - name: key
+          in: header
+          description: api key
+          required: true
+          type: string
+        - name: nonce
+          in: header
+          description: nonce
+          required: false
+          type: string
+          default: whatever
         - name: projectUuid
           in: path
           description: Project UUID
@@ -755,35 +755,79 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«ProjectVo»'
-        '201':
-          description: Created
+            $ref: '#/definitions/Result«int»'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/project/{projectUuid}/get-asset-upload-url':
+  /openapi/v1/project/{projectUuid}/get-media-list:
     get:
       tags:
         - Visla Open Api
-      summary: >-
-        Get the upload parameters(includes upload url) to upload asset to
-        project.
-      operationId: getUploadParametersUsingGET_1
+      summary: get uploaded media info list
+      operationId: listAgentProjectMediasUsingGET_1
+      produces:
+        - '*/*'
+      parameters:
+        - name: key
+          in: header
+          description: api key
+          required: true
+          type: string
+        - name: nonce
+          in: header
+          description: nonce
+          required: false
+          type: string
+          default: whatever
+        - name: projectUuid
+          in: path
+          description: The Project UUID
+          required: true
+          type: string
+        - name: sign
+          in: header
+          description: sign
+          required: true
+          type: string
+          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
+        - name: ts
+          in: header
+          description: timestamp
+          required: true
+          type: string
+          default: '1745911132465'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Result«List«AgentProjectMediaVo»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /openapi/v1/project/{projectUuid}/get-upload-url:
+    get:
+      tags:
+        - Visla Open Api
+      summary: get project upload url to upload
+      operationId: getUploadUrlUsingGET_6
       produces:
         - '*/*'
       parameters:
         - name: fileSuffix
           in: query
-          description: The filename extension
-          required: false
+          description: fileSuffix
+          required: true
           type: string
         - name: key
           in: header
@@ -812,120 +856,24 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«UploadAssetParamVo»'
+            $ref: '#/definitions/Result«OpenUploadResourceParamVo»'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/project/{projectUuid}/get-consumed-credit':
-    get:
-      tags:
-        - Visla Open Api
-      summary: Get consumed credit of a project
-      operationId: getProjectConsumedCreditUsingGET
-      produces:
-        - '*/*'
-      parameters:
-        - name: key
-          in: header
-          description: api key
-          required: true
-          type: string
-        - name: nonce
-          in: header
-          description: nonce
-          required: false
-          type: string
-          default: whatever
-        - name: projectUuid
-          in: path
-          description: Project UUID
-          required: true
-          type: string
-        - name: sign
-          in: header
-          description: sign
-          required: true
-          type: string
-          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
-        - name: ts
-          in: header
-          description: timestamp
-          required: true
-          type: string
-          default: '1742459291139'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Result«int»'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-  '/openapi/project/{projectUuid}/idea-n-audio':
-    get:
-      tags:
-        - Visla Open Api
-      summary: get project idea and audio info
-      operationId: getProjectIdeaAndAudioUsingGET_1
-      produces:
-        - '*/*'
-      parameters:
-        - name: key
-          in: header
-          description: api key
-          required: true
-          type: string
-        - name: nonce
-          in: header
-          description: nonce
-          required: false
-          type: string
-          default: whatever
-        - name: projectUuid
-          in: path
-          description: projectUuid
-          required: true
-          type: string
-        - name: sign
-          in: header
-          description: sign
-          required: true
-          type: string
-          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
-        - name: ts
-          in: header
-          description: timestamp
-          required: true
-          type: string
-          default: '1742459291139'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Result«AllInOneProjectIdeaAndAudioVo»'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-  '/openapi/project/{projectUuid}/info':
+  /openapi/v1/project/{projectUuid}/info:
     get:
       tags:
         - Visla Open Api
       summary: Get project detail information
-      operationId: getProjectDetailUsingGET_1
+      operationId: getProjectDetailUsingGET_3
       produces:
         - '*/*'
       parameters:
@@ -956,24 +904,24 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«ProjectVo»'
+            $ref: '#/definitions/Result«OpenAgentProjectVo»'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/teamspace/{teamspaceUuid}/add-clip':
+  /openapi/v1/teamspace/{teamspaceUuid}/add-audio-project:
     post:
       tags:
         - Visla Open Api
-      summary: add new clip to teamspace
-      operationId: addClipToTeamspaceUsingPOST_1
+      summary: add a blank audio(audio-to-video) project in specific teamspace
+      operationId: addAgentProjectToTeamspaceUsingPOST_4
       consumes:
         - application/json
       produces:
@@ -995,123 +943,7 @@ paths:
           description: reqBody
           required: true
           schema:
-            $ref: '#/definitions/AddClipToSpaceReqBody'
-        - name: sign
-          in: header
-          description: sign
-          required: true
-          type: string
-          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
-        - name: teamspaceUuid
-          in: path
-          description: teamspace uuid
-          required: true
-          type: string
-        - name: ts
-          in: header
-          description: timestamp
-          required: true
-          type: string
-          default: '1742459291139'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Result«ClipInfoVo»'
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-  '/openapi/teamspace/{teamspaceUuid}/add-download-clip':
-    post:
-      tags:
-        - Visla Open Api
-      summary: add new clip to folder with download link
-      operationId: addDownloadClipUsingPOST_2
-      consumes:
-        - application/json
-      produces:
-        - '*/*'
-      parameters:
-        - name: key
-          in: header
-          description: api key
-          required: true
-          type: string
-        - name: nonce
-          in: header
-          description: nonce
-          required: false
-          type: string
-          default: whatever
-        - in: body
-          name: reqBody
-          description: reqBody
-          required: true
-          schema:
-            $ref: '#/definitions/DownloadMediaReqBody'
-        - name: sign
-          in: header
-          description: sign
-          required: true
-          type: string
-          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
-        - name: teamspaceUuid
-          in: path
-          description: teamspace uuid
-          required: true
-          type: string
-        - name: ts
-          in: header
-          description: timestamp
-          required: true
-          type: string
-          default: '1742459291139'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Result«ClipInfoVo»'
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-  '/openapi/teamspace/{teamspaceUuid}/create-video-from-script':
-    post:
-      tags:
-        - Visla Open Api
-      summary: Create a text-2-video project from script
-      operationId: createVideoFromScriptUsingPOST_2
-      consumes:
-        - application/json
-      produces:
-        - '*/*'
-      parameters:
-        - name: key
-          in: header
-          description: api key
-          required: true
-          type: string
-        - name: nonce
-          in: header
-          description: nonce
-          required: false
-          type: string
-          default: whatever
-        - in: body
-          name: reqBody
-          description: reqBody
-          required: true
-          schema:
-            $ref: '#/definitions/OpenApiCreateVideoByScriptReqBody'
+            $ref: '#/definitions/OpenApiScriptToVideoReqBody'
         - name: sign
           in: header
           description: sign
@@ -1128,12 +960,12 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«ProjectVo»'
+            $ref: '#/definitions/Result«OpenAgentProjectVo»'
         '201':
           description: Created
         '401':
@@ -1142,13 +974,128 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      deprecated: true
-  '/openapi/teamspace/{teamspaceUuid}/get-clip-upload-url':
+  /openapi/v1/teamspace/{teamspaceUuid}/add-clip:
+    post:
+      tags:
+        - Visla Open Api
+      summary: add new clip to teamspace
+      operationId: addClipToTeamspaceUsingPOST_3
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: key
+          in: header
+          description: api key
+          required: true
+          type: string
+        - name: nonce
+          in: header
+          description: nonce
+          required: false
+          type: string
+          default: whatever
+        - in: body
+          name: reqBody
+          description: reqBody
+          required: true
+          schema:
+            $ref: '#/definitions/OpenAddClipToSpaceReqBody'
+        - name: sign
+          in: header
+          description: sign
+          required: true
+          type: string
+          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
+        - name: teamspaceUuid
+          in: path
+          description: teamspace uuid
+          required: true
+          type: string
+        - name: ts
+          in: header
+          description: timestamp
+          required: true
+          type: string
+          default: '1745911132465'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Result«OpenClipVo»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /openapi/v1/teamspace/{teamspaceUuid}/create-video-by-url:
+    post:
+      tags:
+        - Visla Open Api
+      summary: Create a blog-2-video project by url in specific teamspace
+      operationId: createVideoByUrlUsingPOST_8
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: key
+          in: header
+          description: api key
+          required: true
+          type: string
+        - name: nonce
+          in: header
+          description: nonce
+          required: false
+          type: string
+          default: whatever
+        - in: body
+          name: reqBody
+          description: reqBody
+          required: true
+          schema:
+            $ref: '#/definitions/OpenApiScriptToVideoReqBody'
+        - name: sign
+          in: header
+          description: sign
+          required: true
+          type: string
+          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
+        - name: teamspaceUuid
+          in: path
+          description: teamspaceUuid
+          required: true
+          type: string
+        - name: ts
+          in: header
+          description: timestamp
+          required: true
+          type: string
+          default: '1745911132465'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Result«OpenAgentProjectVo»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /openapi/v1/teamspace/{teamspaceUuid}/get-clip-upload-url:
     get:
       tags:
         - Visla Open Api
       summary: get clip file upload url
-      operationId: getClipUploadUrlUsingGET
+      operationId: getClipUploadUrlUsingGET_2
       produces:
         - '*/*'
       parameters:
@@ -1184,7 +1131,7 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
@@ -1196,12 +1143,12 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/teamspace/{teamspaceUuid}/info':
+  /openapi/v1/teamspace/{teamspaceUuid}/info:
     get:
       tags:
         - Visla Open Api
       summary: get teamspace info
-      operationId: getTeamspaceInfoUsingGET_1
+      operationId: getTeamspaceInfoUsingGET_3
       produces:
         - '*/*'
       parameters:
@@ -1232,24 +1179,24 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«TeamspaceInfoVo»'
+            $ref: '#/definitions/Result«OpenTeamspaceVo»'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/teamspace/{teamspaceUuid}/list-clip':
+  /openapi/v1/teamspace/{teamspaceUuid}/list-clip:
     get:
       tags:
         - Visla Open Api
       summary: list clips in teamspace
-      operationId: listTeamspaceClipUsingGET_2
+      operationId: listTeamspaceClipUsingGET_5
       produces:
         - '*/*'
       parameters:
@@ -1260,7 +1207,7 @@ paths:
           type: string
         - name: limit
           in: query
-          description: 'The optional page size limit,default=2000,max=2000'
+          description: The optional page size limit,default=2000,max=2000
           required: false
           type: integer
           maximum: 2000
@@ -1293,7 +1240,7 @@ paths:
           default: whatever
         - name: offset
           in: query
-          description: 'The optional page offset, the default value is 0.'
+          description: The optional page offset, the default value is 0.
           required: false
           type: integer
           minimum: 0
@@ -1308,7 +1255,7 @@ paths:
           default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
         - name: sortBy
           in: query
-          description: 'The optional Sort orders, ie. name:asc,createdAt:desc'
+          description: The optional Sort orders, ie. name:asc,createdAt:desc
           required: false
           type: array
           items:
@@ -1324,24 +1271,24 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«PageData«ClipInfoVo»»'
+            $ref: '#/definitions/Result«PageData«OpenClipVo»»'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/teamspace/{teamspaceUuid}/list-project':
+  /openapi/v1/teamspace/{teamspaceUuid}/list-project:
     get:
       tags:
         - Visla Open Api
       summary: list projects in teamspace
-      operationId: listTeamspaceProjectUsingGET_2
+      operationId: listTeamspaceProjectUsingGET_5
       produces:
         - '*/*'
       parameters:
@@ -1352,7 +1299,7 @@ paths:
           type: string
         - name: limit
           in: query
-          description: 'The optional page size limit,default=2000,max=2000'
+          description: The optional page size limit,default=2000,max=2000
           required: false
           type: integer
           maximum: 2000
@@ -1367,7 +1314,7 @@ paths:
           default: whatever
         - name: offset
           in: query
-          description: 'The optional page offset, the default value is 0.'
+          description: The optional page offset, the default value is 0.
           required: false
           type: integer
           minimum: 0
@@ -1382,7 +1329,7 @@ paths:
           default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
         - name: sortBy
           in: query
-          description: 'The optional Sort orders, ie. name:asc,createdAt:desc'
+          description: The optional Sort orders, ie. name:asc,createdAt:desc
           required: false
           type: array
           items:
@@ -1398,24 +1345,24 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«PageData«ProjectVo»»'
+            $ref: '#/definitions/Result«PageData«OpenAgentProjectVo»»'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/teamspace/{teamspaceUuid}/list-stock':
+  /openapi/v1/teamspace/{teamspaceUuid}/list-stock:
     get:
       tags:
         - Visla Open Api
       summary: list stocks in teamspace
-      operationId: listTeamspaceStockUsingGET_1
+      operationId: listTeamspaceStockUsingGET_3
       produces:
         - '*/*'
       parameters:
@@ -1426,7 +1373,7 @@ paths:
           type: string
         - name: limit
           in: query
-          description: 'The optional page size limit,default=2000,max=2000'
+          description: The optional page size limit,default=2000,max=2000
           required: false
           type: integer
           maximum: 2000
@@ -1441,7 +1388,7 @@ paths:
           default: whatever
         - name: offset
           in: query
-          description: 'The optional page offset, the default value is 0.'
+          description: The optional page offset, the default value is 0.
           required: false
           type: integer
           minimum: 0
@@ -1456,7 +1403,7 @@ paths:
           default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
         - name: sortBy
           in: query
-          description: 'The optional Sort orders, ie. name:asc,createdAt:desc'
+          description: The optional Sort orders, ie. name:asc,createdAt:desc
           required: false
           type: array
           items:
@@ -1472,7 +1419,7 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
@@ -1484,12 +1431,12 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/teamspace/{teamspaceUuid}/script-to-video':
+  /openapi/v1/teamspace/{teamspaceUuid}/script-to-video:
     post:
       tags:
         - Visla Open Api
-      summary: Create a video from script
-      operationId: scriptToVideoUsingPOST_3
+      summary: Create a video from script in specific teamspace
+      operationId: scriptToVideoUsingPOST_9
       consumes:
         - application/json
       produces:
@@ -1528,12 +1475,12 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«ProjectVo»'
+            $ref: '#/definitions/Result«OpenAgentProjectVo»'
         '201':
           description: Created
         '401':
@@ -1542,12 +1489,12 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-  /openapi/user/info:
+  /openapi/v1/user/info:
     get:
       tags:
         - Visla Open Api
       summary: get user information
-      operationId: getInfoUsingGET_1
+      operationId: getInfoUsingGET_3
       produces:
         - '*/*'
       parameters:
@@ -1573,24 +1520,24 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«UserVo»'
+            $ref: '#/definitions/Result«OpenUserVo»'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  /openapi/workspace/list:
+  /openapi/v1/workspace/credit-balance:
     get:
       tags:
         - Visla Open Api
-      summary: list my workspaces (owned and joined)
-      operationId: listMyWorkspaceUsingGET_2
+      summary: get workspace credit balance
+      operationId: getMyWorkspaceBalanceUsingGET_1
       produces:
         - '*/*'
       parameters:
@@ -1616,24 +1563,24 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«List«WorkspaceInfoVo»»'
+            $ref: '#/definitions/Result«int»'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/workspace/{workspaceUuid}/info':
+  /openapi/v1/workspace/credit-detail:
     get:
       tags:
         - Visla Open Api
-      summary: get workspace info (and permissions as well)
-      operationId: getWorkspaceInfoUsingGET_1
+      summary: get workspace credit detail info
+      operationId: getMyWorkspaceCreditDetailUsingGET_1
       produces:
         - '*/*'
       parameters:
@@ -1659,34 +1606,24 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
-        - name: withPermission
-          in: query
-          description: withPermission
-          required: false
-          type: boolean
-        - name: workspaceUuid
-          in: path
-          description: workspace uuid
-          required: true
-          type: string
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«WorkspaceInfoVo»'
+            $ref: '#/definitions/Result«OpenWorkspaceCreditVo»'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-  '/openapi/workspace/{workspaceUuid}/list-my-teamspace':
+  /openapi/v1/workspace/list-my-teamspace:
     get:
       tags:
         - Visla Open Api
       summary: list my teamspaces (owned and joined) under current workspace
-      operationId: listMyTeamspaceUsingGET_1
+      operationId: listMyTeamspaceUsingGET_3
       produces:
         - '*/*'
       parameters:
@@ -1712,17 +1649,55 @@ paths:
           description: timestamp
           required: true
           type: string
-          default: '1742459291139'
-        - name: workspaceUuid
-          in: path
-          description: workspace uuid
-          required: true
-          type: string
+          default: '1745911132465'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Result«List«TeamspaceInfoVo»»'
+            $ref: '#/definitions/Result«List«OpenTeamspaceVo»»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /openapi/v1/workspace/my-workspace-info:
+    get:
+      tags:
+        - Visla Open Api
+      summary: get workspace info
+      operationId: getMyWorkspaceInfoUsingGET_2
+      produces:
+        - '*/*'
+      parameters:
+        - name: key
+          in: header
+          description: api key
+          required: true
+          type: string
+        - name: nonce
+          in: header
+          description: nonce
+          required: false
+          type: string
+          default: whatever
+        - name: sign
+          in: header
+          description: sign
+          required: true
+          type: string
+          default: 90bbc7d829bd54a74e77d80731ac3f772c54bcac4a5b106f63754ceccf185cb5
+        - name: ts
+          in: header
+          description: timestamp
+          required: true
+          type: string
+          default: '1745911132465'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Result«OpenWorkspaceVo»'
         '401':
           description: Unauthorized
         '403':
@@ -1744,70 +1719,51 @@ definitions:
           - success
           - todo
     title: ActionResult
-  AddClipToSpaceReqBody:
+  AgentProjectMediaVo:
     type: object
-    required:
-      - clipLink
-      - clipUuid
-      - title
     properties:
-      clipLink:
+      audioLink:
         type: string
-        example: '***'
-        description: clipLink
-      clipUuid:
-        type: string
-        example: 1024204830724096
-        description: clipUuid
       description:
         type: string
-        example: description
-        description: description
-      folderUuid:
+      duration:
+        type: integer
+        format: int32
+      mediaType:
         type: string
-        example: 1024204830724096
-        description: folderUuid
-      privateStock:
-        type: boolean
-        example: true
-        description: privateStock
-      tags:
+        enum:
+          - all
+          - audio
+          - image
+          - video
+      playbackLink:
+        type: string
+      processStatus:
+        type: string
+        enum:
+          - completed
+          - downloading
+          - failed
+          - init
+          - processing
+          - publishing
+          - uploading
+      projectUuid:
+        type: string
+      resourceLink:
+        type: string
+      resourceUuid:
+        type: string
+      tagList:
         type: array
-        example: 'tag1,tag2'
-        description: tags
         items:
           type: string
+      thumbnailLink:
+        type: string
       title:
         type: string
-        example: title
-        description: title
-    title: AddClipToSpaceReqBody
-    description: request body of adding clip to workspace or teamspace
-  AllInOneProjectIdeaAndAudioVo:
-    type: object
-    properties:
-      audioList:
-        type: array
-        description: story audio list
-        items:
-          $ref: '#/definitions/ProjectAssetVo'
-      enhanceWithAi:
-        type: boolean
-        example: true
-        description: Enhance story with AI
-      ideaText:
-        type: string
-        example: I want to create a tiktok videa about injoying life
-        description: user's idea
-      videoList:
-        type: array
-        description: video list
-        items:
-          $ref: '#/definitions/ProjectAssetVo'
-    title: AllInOneProjectIdeaAndAudioVo
-  ArrayNode:
-    type: object
-    title: ArrayNode
+    title: AgentProjectMediaVo
+    description: Media information of the agent project
   AssetTranscript:
     type: object
     properties:
@@ -1890,6 +1846,8 @@ definitions:
       entityType:
         type: string
         enum:
+          - agent_project
+          - agent_project_media
           - clip
           - custom_voice
           - folder
@@ -1898,14 +1856,13 @@ definitions:
           - pictures
           - project
           - projectAsset
-          - project_group
-          - project_group_media
           - project_video
           - sequence
           - stock_audio
           - stock_media
           - storyblocks
           - teamspace
+          - unknown
           - user
           - visla_media
           - voice
@@ -1984,6 +1941,7 @@ definitions:
         enum:
           - downloaded_from_external
           - export_video
+          - narration_recording
           - quick_capture
           - self_recording
           - step_video_screenshot
@@ -2031,269 +1989,148 @@ definitions:
         $ref: '#/definitions/ObjectNode'
     title: ClipTranscriptVo
     description: Clip transcript of the clip
-  DownloadMediaReqBody:
+  ObjectNode:
     type: object
-    required:
-      - downloadLink
-    properties:
-      categoryType:
-        type: string
-        description: 'The asset category, set it when downloading media as project asset'
-        enum:
-          - background_music
-          - footage
-          - intro
-          - main_story
-          - outro
-          - record_voice_over
-          - story_audio
-          - synthetic_voice_over
-          - uncategorized
-          - visual_asset
-      description:
-        type: string
-        example: true
-        description: description
-      downloadLink:
-        type: string
-        minLength: 0
-        maxLength: 250
-        pattern: >-
-          ^(https:\/\/)((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$
-      privateStock:
-        type: boolean
-        example: true
-        description: privateStock
-      tags:
-        type: array
-        example: 'tag1,tag2'
-        description: tags
-        items:
-          type: string
-    title: DownloadMediaReqBody
-  ExtractAndMergeClipReqBody:
-    type: object
-    properties:
-      extractList:
-        type: array
-        description: extract time ranger list
-        items:
-          $ref: '#/definitions/TimePeriod'
-      needMerge:
-        type: boolean
-        description: merge/individual
-    title: ExtractAndMergeClipReqBody
-    description: Extract clip requests body
-  FeePlanVo:
-    type: object
-    properties:
-      addonName:
-        type: string
-      addonType:
-        type: integer
-        format: int32
-      paymentPlatform:
-        type: integer
-        format: int32
-      planName:
-        type: string
-      planType:
-        type: integer
-        format: int32
-      subscribeId:
-        type: string
-      vipTemp:
-        type: boolean
-    title: FeePlanVo
-  FolderSimpleInfoVo:
-    type: object
-    properties:
-      folderName:
-        type: string
-      folderUuid:
-        type: string
-    title: FolderSimpleInfoVo
-  NewClipReqBody:
+    title: ObjectNode
+  OpenAddClipToSpaceReqBody:
     type: object
     required:
       - clipLink
-      - clipType
       - clipUuid
       - title
     properties:
-      audioSamplingRate:
-        type: integer
-        format: int32
-        example: 22
-        description: audioSamplingRate
       clipLink:
         type: string
         example: '***'
         description: clipLink
-      clipStatus:
-        type: string
-        example: init
-        description: clipStatus
-        enum:
-          - completed
-          - downloading
-          - failed
-          - init
-          - processing
-          - publishing
-          - uploading
-      clipType:
-        type: string
-        example: video
-        description: video;audio;image
       clipUuid:
         type: string
-        example: 2c000dv2nk224g00a6
+        example: 1024204830724096
         description: clipUuid
-      duration:
-        type: integer
-        format: int32
-        example: 22
-        description: duration
-      height:
-        type: integer
-        format: int32
-        example: 111
-        description: height
-      needAsr:
-        type: boolean
-        example: true
-        description: needAsr
-      privateStock:
-        type: boolean
-        example: true
-        description: privateStock
-      stereoAudio:
-        type: integer
-        format: int32
-        example: 11
-        description: stereoAudio
-      thumbnailLink:
-        type: string
-        example: '***'
-        description: thumbnailLink
-      title:
-        type: string
-        example: title
-        description: title
-      width:
-        type: integer
-        format: int32
-        example: 111
-        description: width
-    title: NewClipReqBody
-    description: new clip req body
-  ObjectNode:
-    type: object
-    title: ObjectNode
-  OpenAiCreateVideoByUrlReqBody:
-    type: object
-    required:
-      - url
-      - video_metadata
-    properties:
-      target_video_description:
-        type: string
-        example: step to step tutorial video on how to master Java
-        description: User's description of the target video.
-      url:
-        type: string
-        example: 'https://themeisle.com/blog/history-of-blogging'
-        description: The blog url address
-      video_metadata:
-        description: 'Video metadata (including title, description, and tags)'
-        $ref: '#/definitions/OpenAiCreateVideoMetadata'
-    title: OpenAiCreateVideoByUrlReqBody
-    description: >-
-      This request body to create a Visla video by inputing valid URL of the
-      webpage, and optional description of the target video
-  OpenAiCreateVideoMetadata:
-    type: object
-    properties:
       description:
         type: string
-        example: >-
-          Join us on this motivational journey where we tackle the issue of
-          self-doubt, using inspiring quotes, powerful imagery, and uplifting
-          music. Let's boost your self-confidence and reshape your perspective
-          towards life.
-        description: >-
-          A detailed summary of the video's content. This is typically used to
-          provide more information about the video, such as the topics covered,
-          featured guests or locations, or the purpose of the video. It also
-          often includes keywords to help viewers find the video through search.
+        example: description
+        description: description
+      needAsr:
+        type: boolean
       tags:
         type: array
-        example:
-          - Self-Doubt
-          - Motivation
-          - Inspiration
-          - Self-Belief
-          - Personal Growth
-        description: >-
-          Tags or keywords associated with the video. These are used to help
-          categorize the video and make it more discoverable to users searching
-          for related content. Tags can be single words or short phrases related
-          to the video's subject, theme, or context.
+        example: tag1,tag2
+        description: tags
         items:
           type: string
       title:
         type: string
-        example: 'Mastering Self-Doubt: A Journey Towards Self-Belief'
-        description: >-
-          The name or title of the video. It is a concise summary that reflects
-          the content of the video and is typically used to attract viewer's
-          attention and provide a clue about the video's content.
-    title: OpenAiCreateVideoMetadata
-    description: ChatGPT Plugin Create Video Metadata
+        example: title
+        description: title
+    title: OpenAddClipToSpaceReqBody
+  OpenAgentProjectVo:
+    type: object
+    properties:
+      aiRecommendStatus:
+        type: string
+        enum:
+          - failure
+          - normal
+          - processing
+          - processing_blog
+          - processing_create_video
+          - processing_translation
+          - processing_voice_align
+      commentCnt:
+        type: integer
+        format: int32
+      createdAt:
+        type: integer
+        format: int64
+        example: 1600000000000
+        description: The create time of this record
+      creator:
+        $ref: '#/definitions/UserSimpleInfoVo'
+      description:
+        type: string
+        example: This is my first project
+        description: The Project Description
+      folderUuid:
+        type: string
+        example: 1024102310221021
+        description: Folder UUID
+      language:
+        type: string
+      modifiedAt:
+        type: integer
+        format: int64
+        example: 1600000000000
+        description: The update timestamp.
+      modifier:
+        $ref: '#/definitions/UserSimpleInfoVo'
+      name:
+        type: string
+        example: My Project
+        description: The Project Name
+      progressStatus:
+        type: string
+        enum:
+          - draft_video
+          - editing
+          - error
+          - final_enhancement
+          - generated_videos
+          - init
+          - ongoing
+          - preparation
+          - rough_cut
+          - select_main_story
+          - supplemental_footage
+      projectUuid:
+        type: string
+      shareLink:
+        type: string
+        example: http://www.xxx.us/yyyy
+        description: The Project sharing link
+      teamspaceUuid:
+        type: string
+        example: 1024102310221021
+        description: Teamspace UUID
+      thumbnailLink:
+        type: string
+        example: http://www.xxx.us/abc.jpg
+        description: The Project thumbnail link
+      version:
+        type: integer
+        format: int32
+        example: 1
+        description: The Project version
+      videoFormat:
+        type: string
+        enum:
+          - '16:9'
+          - '1:1'
+          - '4:3'
+          - '9:16'
+          - custom
+      viewTimes:
+        type: integer
+        format: int32
+    title: OpenAgentProjectVo
+    description: Basic information of the project
   OpenApiBgmOptionsNode:
     type: object
     properties:
       use_free_stocks:
         type: boolean
         example: true
-        description: 'true/false, whether to use free stocks in the video creation'
+        description: true/false, whether to use free stocks in the video creation
       use_premium_stocks:
         type: boolean
     title: OpenApiBgmOptionsNode
     description: Recommend BGM Options
-  OpenApiCreateVideoByScriptReqBody:
+  OpenApiExportVideoReqBody:
     type: object
-    required:
-      - script
     properties:
       completion_webhook:
         type: string
-        example: >-
-          https://xyz.com/hooks/callback/123/abcdef01-2345-6789-abcd-ef0123456789/abcdef0123456789abcdef0123456789abcdef01
-        description: >-
-          third-party site callback url to call after video creation is
-          completed in Visla
-      script:
-        type: string
-        example: 'This is a sample script text, blahblah'
-        description: >-
-          The video script or voiceover audio descript for the video, which can
-          be up to 10000 characters long
-        minLength: 0
-        maxLength: 10000
-      target_video_description:
-        type: string
-        example: Fast-paced video for TikTok. Dynamic transitions and vibrant pacing.
-        description: User's description of the target video.
-        minLength: 0
-        maxLength: 1000
-      use_personal_stock:
-        type: boolean
-        example: false
-        description: whether to use personal stock in the video creation
-    title: OpenApiCreateVideoByScriptReqBody
-    description: This request body to create a Visla video by inputing video script
+    title: OpenApiExportVideoReqBody
   OpenApiFootageOptionsNode:
     type: object
     properties:
@@ -2306,13 +2143,11 @@ definitions:
       use_private_stocks:
         type: boolean
         example: true
-        description: 'true/false, whether to use private stocks in the video creation'
+        description: true/false, whether to use private stocks in the video creation
     title: OpenApiFootageOptionsNode
     description: Recommend Footage Options
   OpenApiScriptToVideoReqBody:
     type: object
-    required:
-      - script
     properties:
       bgm_options:
         example: {}
@@ -2329,20 +2164,14 @@ definitions:
         example: {}
         description: search footage options
         $ref: '#/definitions/OpenApiFootageOptionsNode'
-      script:
-        type: string
-        example: 'This is a sample script text, blahblah'
-        description: >-
-          The video script or voiceover audio descript for the video, which can
-          be up to 10000 characters long
-        minLength: 0
-        maxLength: 10000
       target_video:
         example: {}
         description: >-
           Any requirements that are not included in target_video node, such as
           music genre etc. Default if not specified: empty string
         $ref: '#/definitions/OpenApiTargetVideoPropertiesNode'
+      video_description:
+        type: string
     title: OpenApiScriptToVideoReqBody
     description: >-
       This request body to create a Visla video by inputing video script and
@@ -2360,44 +2189,329 @@ definitions:
         type: string
     title: OpenApiTargetVideoPropertiesNode
     description: Target Video Properties
-  OpenApiTranscriptBody:
+  OpenClipVo:
     type: object
     properties:
-      items:
-        type: array
-        items:
-          $ref: '#/definitions/OpenApiTranscriptItem'
-    title: OpenApiTranscriptBody
-  OpenApiTranscriptItem:
-    type: object
-    properties:
-      content:
+      clipLink:
         type: string
-      end_time:
-        type: number
-        format: double
-      start_time:
-        type: number
-        format: double
-      type:
+      clipStatus:
         type: string
-    title: OpenApiTranscriptItem
-  OpenapiUpdateClipTranscriptReqBody:
-    type: object
-    properties:
-      transcript:
-        $ref: '#/definitions/OpenApiTranscriptBody'
-    title: OpenapiUpdateClipTranscriptReqBody
-  OrgInfo:
-    type: object
-    properties:
-      isOrgWorkspace:
+        enum:
+          - completed
+          - downloading
+          - failed
+          - init
+          - processing
+          - publishing
+          - uploading
+      clipType:
+        type: string
+        enum:
+          - all
+          - audio
+          - image
+          - video
+      clipUuid:
+        type: string
+      createdAt:
+        type: integer
+        format: int64
+        example: 1600000000000
+        description: The create time of this record
+      creator:
+        $ref: '#/definitions/UserSimpleInfoVo'
+      creatorId:
+        type: integer
+        format: int64
+      credit:
+        type: string
+      description:
+        type: string
+      duration:
+        type: integer
+        format: int32
+      entityType:
+        type: string
+        enum:
+          - agent_project
+          - agent_project_media
+          - clip
+          - custom_voice
+          - folder
+          - gettyimages
+          - pexels
+          - pictures
+          - project
+          - projectAsset
+          - project_video
+          - sequence
+          - stock_audio
+          - stock_media
+          - storyblocks
+          - teamspace
+          - unknown
+          - user
+          - visla_media
+          - voice
+          - workspace
+      folderName:
+        type: string
+      folderUuid:
+        type: string
+      hasAudio:
         type: boolean
-      orgName:
+      height:
+        type: integer
+        format: int32
+      isCompositeVideo:
+        type: boolean
+      isDeleted:
+        type: boolean
+      modifiedAt:
+        type: integer
+        format: int64
+        example: 1600000000000
+        description: The update timestamp.
+      modifier:
+        $ref: '#/definitions/UserSimpleInfoVo'
+      modifierId:
+        type: integer
+        format: int64
+      ownerAvatar:
         type: string
-      orgUuid:
+      ownerName:
         type: string
-    title: OrgInfo
+      playbackLink:
+        type: string
+      shareLink:
+        type: string
+      tagList:
+        type: array
+        description: Assets tags
+        items:
+          type: string
+      teamspaceUuid:
+        type: string
+      thumbnailLink:
+        type: string
+      title:
+        type: string
+      width:
+        type: integer
+        format: int32
+    title: OpenClipVo
+    description: Basic information of the clip
+  OpenProjectGenerateReqBody:
+    type: object
+    properties:
+      bgm_options:
+        example: {}
+        description: search footage options
+        $ref: '#/definitions/OpenApiBgmOptionsNode'
+      completion_webhook:
+        type: string
+        example: https://example.com/webhook
+        description: The webhook url to send the video result
+      footage_options:
+        example: {}
+        description: search footage options
+        $ref: '#/definitions/OpenApiFootageOptionsNode'
+    title: OpenProjectGenerateReqBody
+  OpenResourceUploadReqBody:
+    type: object
+    properties:
+      description:
+        type: string
+        example: This is a description
+        description: Description of asset
+      resourceLink:
+        type: string
+        example: http://test.visla.us/abc.mp4
+        description: Asset link
+      resourceUuid:
+        type: string
+        example: abc
+        description: Asset UUID
+      tagList:
+        type: array
+        description: Assets tags
+        items:
+          type: string
+      title:
+        type: string
+        example: A title
+        description: Asset title
+        minLength: 0
+        maxLength: 200
+    title: OpenResourceUploadReqBody
+    description: Request body of adding a uploaded asset to project
+  OpenTeamspaceVo:
+    type: object
+    properties:
+      createdAt:
+        type: string
+        format: date-time
+      creatorUuid:
+        type: string
+      description:
+        type: string
+      isAllHands:
+        type: boolean
+      isMySpace:
+        type: boolean
+      joinTime:
+        type: string
+        format: date-time
+      memberCount:
+        type: integer
+        format: int32
+      memberRole:
+        type: string
+        enum:
+          - guest
+          - member
+          - owner
+      modifiedAt:
+        type: string
+        format: date-time
+      name:
+        type: string
+      status:
+        type: string
+        enum:
+          - active
+          - created
+          - deleted
+          - inactive
+          - trashed
+      teamspaceUuid:
+        type: string
+      workspaceUuid:
+        type: string
+    title: OpenTeamspaceVo
+    description: Teamspace Basic Information
+  OpenUploadResourceParamVo:
+    type: object
+    properties:
+      resourceUuid:
+        type: string
+        example: abc
+        description: The Asset UUID.
+      uploadUrl:
+        type: string
+        example: http://api.visla.us/xxxxx.mp4
+        description: The URL to upload this resource.
+    title: OpenUploadResourceParamVo
+    description: The response body of Upload resources
+  OpenUserVo:
+    type: object
+    properties:
+      avatar:
+        type: string
+      createdAt:
+        type: integer
+        format: int64
+        example: 1600000000000
+        description: The create time of this record
+      email:
+        type: string
+      familyName:
+        type: string
+      givenName:
+        type: string
+      loginTime:
+        type: integer
+        format: int64
+        example: 1600000000000
+        description: The login time
+      modifiedAt:
+        type: integer
+        format: int64
+        example: 1600000000000
+        description: The update timestamp.
+      regTime:
+        type: integer
+        format: int64
+        example: 1600000000000
+        description: The register time
+      regType:
+        type: string
+        enum:
+          - apple_oauth
+          - email_password
+          - google_oauth
+          - sso_oauth
+      userStatus:
+        type: string
+        enum:
+          - active
+          - disabled
+          - inactive
+      userUuid:
+        type: string
+    title: OpenUserVo
+  OpenWorkspaceCreditVo:
+    type: object
+    properties:
+      cashableCreditBalance:
+        type: number
+      creditBalance:
+        type: number
+      flexibleCreditBalance:
+        type: number
+      frozenCredit:
+        type: number
+      monthlyCashableCreditUsed:
+        type: number
+      monthlyCredit:
+        type: number
+      monthlyCreditUsed:
+        type: number
+      monthlyFlexibleCredit:
+        type: number
+      monthlyFlexibleCreditUsed:
+        type: number
+      monthlyNonCashableCreditUsed:
+        type: number
+      nonCashableCreditBalance:
+        type: number
+    title: OpenWorkspaceCreditVo
+  OpenWorkspaceVo:
+    type: object
+    properties:
+      avatar:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      creatorUuid:
+        type: string
+      description:
+        type: string
+      joinTime:
+        type: string
+        format: date-time
+      memberCount:
+        type: integer
+        format: int32
+      memberRole:
+        type: string
+        enum:
+          - guest
+          - member
+          - owner
+      modifiedAt:
+        type: string
+        format: date-time
+      name:
+        type: string
+      orgId:
+        type: integer
+        format: int64
+      workspaceUuid:
+        type: string
+    title: OpenWorkspaceVo
+    description: Workspace Detail Information
   Outro:
     type: object
     properties:
@@ -2424,7 +2538,7 @@ definitions:
         $ref: '#/definitions/Paging'
     title: PageData«ClipInfoVo»
     description: page data
-  PageData«ProjectVo»:
+  PageData«OpenAgentProjectVo»:
     type: object
     properties:
       ext:
@@ -2432,10 +2546,23 @@ definitions:
       list:
         type: array
         items:
-          $ref: '#/definitions/ProjectVo'
+          $ref: '#/definitions/OpenAgentProjectVo'
       paging:
         $ref: '#/definitions/Paging'
-    title: PageData«ProjectVo»
+    title: PageData«OpenAgentProjectVo»
+    description: page data
+  PageData«OpenClipVo»:
+    type: object
+    properties:
+      ext:
+        $ref: '#/definitions/ObjectNode'
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/OpenClipVo'
+      paging:
+        $ref: '#/definitions/Paging'
+    title: PageData«OpenClipVo»
     description: page data
   Paging:
     type: object
@@ -2455,16 +2582,6 @@ definitions:
         type: integer
         format: int64
     title: Paging
-  PrivateStockSelectVo:
-    type: object
-    properties:
-      selected:
-        type: boolean
-      teamspace:
-        $ref: '#/definitions/TeamspaceSimpleInfoVo'
-      type:
-        type: string
-    title: PrivateStockSelectVo
   ProcessResultVo:
     type: object
     properties:
@@ -2485,653 +2602,7 @@ definitions:
       transcript:
         $ref: '#/definitions/AssetTranscript'
     title: ProcessResultVo
-  ProjectAssetResolutionVo:
-    type: object
-    properties:
-      link:
-        type: string
-        description: resolution link url
-      resolution:
-        type: string
-        description: ld/sd/hd/fhd/4k
-    title: ProjectAssetResolutionVo
-    description: The Project Asset Resolution Vo
-  ProjectAssetUploadReqBody:
-    type: object
-    properties:
-      assetLink:
-        type: string
-        example: 'http://test.visla.us/abc.mp4'
-        description: Asset link
-      assetType:
-        type: string
-        description: Asset Type
-        enum:
-          - composed_by_sequence
-          - downloaded_from_external
-          - export_video
-          - generated_by_ai
-          - group_recording
-          - imported_from_integrate
-          - imported_from_library
-          - imported_from_personal_stock
-          - imported_from_recommendation
-          - imported_from_sharing
-          - imported_from_stock
-          - quick_capture
-          - scene_synthetic_voice_over
-          - scene_voice_over
-          - self_recording
-          - step_video_pictures
-          - uploaded_from_local
-      assetUuid:
-        type: string
-        example: abc
-        description: Asset UUID
-      categoryType:
-        type: string
-        description: Asset category
-        enum:
-          - background_music
-          - footage
-          - intro
-          - main_story
-          - outro
-          - record_voice_over
-          - story_audio
-          - synthetic_voice_over
-          - uncategorized
-          - visual_asset
-      description:
-        type: string
-        example: This is a description
-        description: Description of asset
-      mediaType:
-        type: string
-        description: Media Type
-      sourceMd5:
-        type: string
-      tagList:
-        type: array
-        description: Assets tags
-        items:
-          type: string
-      title:
-        type: string
-        example: A title
-        description: Asset title
-        minLength: 0
-        maxLength: 200
-    title: ProjectAssetUploadReqBody
-    description: Request body of adding a uploaded asset to project
-  ProjectAssetVo:
-    type: object
-    properties:
-      assetCount:
-        type: integer
-        format: int32
-        description: The asset count of this sequence contains.
-      assetLink:
-        type: string
-        description: The Asset link
-      assetType:
-        type: string
-        enum:
-          - composed_by_sequence
-          - downloaded_from_external
-          - export_video
-          - generated_by_ai
-          - group_recording
-          - imported_from_integrate
-          - imported_from_library
-          - imported_from_personal_stock
-          - imported_from_recommendation
-          - imported_from_sharing
-          - imported_from_stock
-          - quick_capture
-          - scene_synthetic_voice_over
-          - scene_voice_over
-          - self_recording
-          - step_video_pictures
-          - uploaded_from_local
-      assetUuid:
-        type: string
-        description: Asset UUID
-      audioDetect:
-        type: string
-        description: init/need_asr/not_need_asr
-        enum:
-          - init
-          - need_asr
-          - not_need_asr
-      audioLink:
-        type: string
-        description: the audio link
-      capabilities:
-        type: object
-        description: '{canStar: true, canEdit: true, canShare: true,…}'
-        additionalProperties:
-          type: boolean
-      categoryType:
-        type: string
-        enum:
-          - background_music
-          - footage
-          - intro
-          - main_story
-          - outro
-          - record_voice_over
-          - story_audio
-          - synthetic_voice_over
-          - uncategorized
-          - visual_asset
-      createdAt:
-        type: integer
-        format: int64
-        example: 1600000000000
-        description: The create time of this record
-      credit:
-        type: string
-        description: Credit
-      description:
-        type: string
-        description: The description
-      duration:
-        type: integer
-        format: int32
-        description: Duration
-      entityType:
-        type: string
-        description: entity type
-        enum:
-          - clip
-          - custom_voice
-          - folder
-          - gettyimages
-          - pexels
-          - pictures
-          - project
-          - projectAsset
-          - project_group
-          - project_group_media
-          - project_video
-          - sequence
-          - stock_audio
-          - stock_media
-          - storyblocks
-          - teamspace
-          - user
-          - visla_media
-          - voice
-          - workspace
-      entityUuid:
-        type: string
-        description: media uuid
-      height:
-        type: integer
-        format: int32
-        description: Height
-      mainStoryOrder:
-        type: integer
-        format: int32
-        description: The main sort order of each Main Story
-      mark:
-        type: object
-        description: the mark of project asset
-      mediaType:
-        type: string
-        enum:
-          - all
-          - audio
-          - image
-          - video
-      microPreviewLink:
-        type: string
-        description: the micro preivew link.
-      moderateStatus:
-        type: string
-        enum:
-          - approved
-          - pending
-          - rejected
-      modifiedAt:
-        type: integer
-        format: int64
-        example: 1600000000000
-        description: The modify time of this record
-      ownerAvatar:
-        type: string
-        example: 'http://www.xxx.us.abc.jpg'
-        description: The Project Asset Owner avatar
-      ownerName:
-        type: string
-        example: abc
-        description: The Project Asset Owner Name
-      ownerUuid:
-        type: string
-        description: The Asset Owner UUID
-      playbackLink:
-        type: string
-        description: the m3u8 link of project asset
-      processResult:
-        description: the process result of project asset
-        $ref: '#/definitions/ProcessResultVo'
-      processStatus:
-        type: string
-        enum:
-          - completed
-          - downloading
-          - failed
-          - init
-          - processing
-          - publishing
-          - uploading
-      projectTakeId:
-        type: integer
-        format: int32
-        description: The Project Take ID
-      projectUuid:
-        type: string
-        description: The Project UUID
-      providerId:
-        type: string
-        description: The provider id
-        enum:
-          - Getty Images
-          - free-stock-music
-          - none
-          - pexels
-          - pixabay
-          - storyblocks
-      providerInfo:
-        description: providerInfo
-        $ref: '#/definitions/ProviderInfoVo'
-      recordingUuid:
-        type: string
-        description: The Project Recording UUID
-      resolutions:
-        type: array
-        description: Asset resolutions
-        items:
-          $ref: '#/definitions/ProjectAssetResolutionVo'
-      role:
-        type: string
-        example: viewer
-        description: role
-        enum:
-          - contributor
-          - manager
-          - viewer
-      sequence:
-        type: boolean
-      sequenceUuid:
-        type: string
-        description: The Project Asset Group UUID
-      sourceClipUuid:
-        type: string
-        description: The sourceClip UUID
-      sourceEntityUuid:
-        type: string
-        description: The sourceEntity UUID
-      speed:
-        type: number
-        description: the play speed
-      starred:
-        type: boolean
-        description: 'false'
-      status:
-        type: string
-        description: 'Status: active, deleted'
-        enum:
-          - active
-          - created
-          - deleted
-          - inactive
-          - trashed
-      tagList:
-        type: array
-        description: Assets tags
-        items:
-          type: string
-      thumbnailLink:
-        type: string
-        description: the thumbnail link.
-      title:
-        type: string
-        description: The title of this Asset
-      usedInDraftVideo:
-        type: boolean
-        description: true/false
-      usedTimesInTimeline:
-        type: integer
-        format: int32
-        description: how many times used in project timeline
-      videoshot:
-        description: videoshot
-        $ref: '#/definitions/ObjectNode'
-      waveAudioLink:
-        type: string
-        description: the wave audio link
-      width:
-        type: integer
-        format: int32
-        description: Width
-    title: ProjectAssetVo
-    description: The response of Project Asset APIs
-  ProjectBrollPacingBo:
-    type: object
-    properties:
-      duration:
-        type: integer
-        format: int32
-      gap:
-        type: integer
-        format: int32
-      selected:
-        type: boolean
-      type:
-        type: string
-        enum:
-          - custom
-          - fast
-          - moderate
-          - optimal
-          - slow
-    title: ProjectBrollPacingBo
-  ProjectLockVo:
-    type: object
-    properties:
-      isLocked:
-        type: boolean
-      projectUuid:
-        type: string
-      userAvatar:
-        type: string
-      userEmail:
-        type: string
-      userName:
-        type: string
-      userUuid:
-        type: string
-    title: ProjectLockVo
-  ProjectRecommendConfVo:
-    type: object
-    properties:
-      brollPacing:
-        type: array
-        items:
-          $ref: '#/definitions/ProjectBrollPacingBo'
-      privateStocks:
-        type: array
-        items:
-          $ref: '#/definitions/PrivateStockSelectVo'
-      useAiImage:
-        type: boolean
-      useFreeBgm:
-        type: boolean
-      useFreeStock:
-        type: boolean
-      useGettyStock:
-        type: boolean
-      usePersonalStock:
-        type: boolean
-      usePremiumBgm:
-        type: boolean
-      usePremiumStock:
-        type: boolean
-      usePubStock:
-        type: boolean
-    title: ProjectRecommendConfVo
-  ProjectVo:
-    type: object
-    properties:
-      aiGenerateVoiceStatus:
-        type: string
-        enum:
-          - failure
-          - no_data
-          - normal
-          - processing
-      aiRecommendStatus:
-        type: string
-        enum:
-          - failure
-          - normal
-          - processing
-          - processing_blog
-          - processing_translation
-          - processing_voice_align
-      aiSummaryStatus:
-        type: string
-        enum:
-          - failure
-          - normal
-          - processing
-      capabilities:
-        type: object
-        description: '{canStar: true, canEdit: true, canShare: true,…}'
-        additionalProperties:
-          type: boolean
-      claimedStatus:
-        type: boolean
-        description: true/false
-      commentCnt:
-        type: integer
-        format: int32
-      createdAt:
-        type: integer
-        format: int64
-        example: 1600000000000
-        description: The create time of this record
-      creationTemplate:
-        type: string
-        example: Video with Voice/Text-to-Video
-        description: Project Video Creation Template
-        enum:
-          - audio-to-video
-          - blog-to-video
-          - idea-to-video
-          - speech-to-video
-          - step-to-video
-          - text-to-video
-          - video-with-voice
-          - visual-to-video
-      creator:
-        $ref: '#/definitions/UserSimpleInfoVo'
-      description:
-        type: string
-        example: This is my first project
-        description: The Project Description
-      feePlan:
-        $ref: '#/definitions/FeePlanVo'
-      folder:
-        example: abc
-        description: The Folder Info
-        $ref: '#/definitions/FolderSimpleInfoVo'
-      folderUuid:
-        type: string
-        example: 1024102310221021
-        description: Folder UUID
-      hasAICreatedVideo:
-        type: boolean
-        description: true/false
-      hasSelfRecordingUnsaved:
-        type: boolean
-        description: true/false
-      isEditing:
-        type: boolean
-        description: true/false
-      isSharedWithMe:
-        type: boolean
-      language:
-        type: string
-      lastProgressStatus:
-        type: string
-        enum:
-          - draft_video
-          - editing
-          - error
-          - final_enhancement
-          - generated_videos
-          - init
-          - ongoing
-          - preparation
-          - rough_cut
-          - select_main_story
-          - supplemental_footage
-      lockInfo:
-        $ref: '#/definitions/ProjectLockVo'
-      modifiedAt:
-        type: integer
-        format: int64
-        example: 1600000000000
-        description: The update timestamp.
-      modifier:
-        $ref: '#/definitions/UserSimpleInfoVo'
-      name:
-        type: string
-        example: My Project
-        description: The Project Name
-      orgName:
-        type: string
-        example: abc
-        description: The Project Owner's org Name
-      orgUuid:
-        type: string
-        example: abc
-        description: The Project Owner's org Uuid
-      ownerAvatar:
-        type: string
-        example: 'http://www.xxx.us.abc.jpg'
-        description: The Project Owner avatar
-      ownerName:
-        type: string
-        example: abc
-        description: The Project Owner Name
-      ownerUuid:
-        type: string
-        example: abc
-        description: The Project Owner UUID
-      progressStatus:
-        type: string
-        enum:
-          - draft_video
-          - editing
-          - error
-          - final_enhancement
-          - generated_videos
-          - init
-          - ongoing
-          - preparation
-          - rough_cut
-          - select_main_story
-          - supplemental_footage
-      projectUuid:
-        type: string
-        example: abc
-        description: The Project UUID
-      publishPlatform:
-        type: string
-      role:
-        type: string
-        description: viewer/contributor/manager/owner
-      scriptMode:
-        type: string
-        example: 1
-        description: The Project Script Mode
-        enum:
-          - advanced_mode
-          - basic_mode
-          - non
-      shareInfo:
-        $ref: '#/definitions/ShareInfo'
-      shareLink:
-        type: string
-        example: 'http://www.xxx.us/yyyy'
-        description: The Project sharing link
-      shareWithPlugin:
-        type: boolean
-      sourcePlatform:
-        type: string
-        enum:
-          - adobe_express
-          - canva
-          - chat_gpt
-          - openapi
-          - visla
-          - visla_www
-          - zapier
-      starred:
-        type: boolean
-        description: true/false
-      syntheticAll:
-        type: boolean
-      teamspace:
-        example: abc
-        description: The Teamspace Info belong to
-        $ref: '#/definitions/TeamspaceSimpleInfoVo'
-      teamspaceUuid:
-        type: string
-        example: 1024102310221021
-        description: Teamspace UUID
-      thumbnailLink:
-        type: string
-        example: 'http://www.xxx.us/abc.jpg'
-        description: The Project thumbnail link
-      version:
-        type: integer
-        format: int32
-        example: 1
-        description: The Project version
-      vesStatus:
-        type: string
-        enum:
-          - ai_editing
-          - failure
-          - normal
-          - self_editing
-      videoFormat:
-        type: integer
-        format: int32
-      viewTimes:
-        type: integer
-        format: int32
-    title: ProjectVo
-    description: Basic information of the project
-  ProviderInfoVo:
-    type: object
-    properties:
-      license:
-        type: string
-        description: 'license: enum'
-        enum:
-          - CC BY 3.0
-          - CC BY 4.0
-          - CC0
-          - Getty Images
-          - free
-          - storyblocks
-      licenseDes:
-        type: string
-        description: The description of stock media license.
-      licenseLink:
-        type: string
-        description: The link of stock media license information.
-      providerCode:
-        type: string
-        description: provider code
-        enum:
-          - Getty Images
-          - free-stock-music
-          - none
-          - pexels
-          - pixabay
-          - storyblocks
-      providerLink:
-        type: string
-        description: provider code
-    title: ProviderInfoVo
-  Result«AllInOneProjectIdeaAndAudioVo»:
+  Result«AgentProjectMediaVo»:
     type: object
     properties:
       code:
@@ -3140,7 +2611,7 @@ definitions:
         example: 0
         description: result code
       data:
-        $ref: '#/definitions/AllInOneProjectIdeaAndAudioVo'
+        $ref: '#/definitions/AgentProjectMediaVo'
       msg:
         type: string
         example: success
@@ -3149,7 +2620,7 @@ definitions:
         type: string
         example: 0af7651916cd43dd8448eb211c80319c
         description: trace id
-    title: Result«AllInOneProjectIdeaAndAudioVo»
+    title: Result«AgentProjectMediaVo»
     description: result object
   Result«ClipDownloadVo»:
     type: object
@@ -3171,26 +2642,6 @@ definitions:
         description: trace id
     title: Result«ClipDownloadVo»
     description: result object
-  Result«ClipInfoVo»:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-        example: 0
-        description: result code
-      data:
-        $ref: '#/definitions/ClipInfoVo'
-      msg:
-        type: string
-        example: success
-        description: result message
-      trackingId:
-        type: string
-        example: 0af7651916cd43dd8448eb211c80319c
-        description: trace id
-    title: Result«ClipInfoVo»
-    description: result object
   Result«ClipTranscriptVo»:
     type: object
     properties:
@@ -3211,7 +2662,7 @@ definitions:
         description: trace id
     title: Result«ClipTranscriptVo»
     description: result object
-  Result«List«ClipInfoVo»»:
+  Result«List«AgentProjectMediaVo»»:
     type: object
     properties:
       code:
@@ -3222,7 +2673,7 @@ definitions:
       data:
         type: array
         items:
-          $ref: '#/definitions/ClipInfoVo'
+          $ref: '#/definitions/AgentProjectMediaVo'
       msg:
         type: string
         example: success
@@ -3231,9 +2682,9 @@ definitions:
         type: string
         example: 0af7651916cd43dd8448eb211c80319c
         description: trace id
-    title: Result«List«ClipInfoVo»»
+    title: Result«List«AgentProjectMediaVo»»
     description: result object
-  Result«List«TeamspaceInfoVo»»:
+  Result«List«OpenTeamspaceVo»»:
     type: object
     properties:
       code:
@@ -3244,7 +2695,7 @@ definitions:
       data:
         type: array
         items:
-          $ref: '#/definitions/TeamspaceInfoVo'
+          $ref: '#/definitions/OpenTeamspaceVo'
       msg:
         type: string
         example: success
@@ -3253,31 +2704,9 @@ definitions:
         type: string
         example: 0af7651916cd43dd8448eb211c80319c
         description: trace id
-    title: Result«List«TeamspaceInfoVo»»
+    title: Result«List«OpenTeamspaceVo»»
     description: result object
-  Result«List«WorkspaceInfoVo»»:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-        example: 0
-        description: result code
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/WorkspaceInfoVo'
-      msg:
-        type: string
-        example: success
-        description: result message
-      trackingId:
-        type: string
-        example: 0af7651916cd43dd8448eb211c80319c
-        description: trace id
-    title: Result«List«WorkspaceInfoVo»»
-    description: result object
-  'Result«Map«string,object»»':
+  Result«Map«string,object»»:
     type: object
     properties:
       code:
@@ -3295,7 +2724,147 @@ definitions:
         type: string
         example: 0af7651916cd43dd8448eb211c80319c
         description: trace id
-    title: 'Result«Map«string,object»»'
+    title: Result«Map«string,object»»
+    description: result object
+  Result«OpenAgentProjectVo»:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        example: 0
+        description: result code
+      data:
+        $ref: '#/definitions/OpenAgentProjectVo'
+      msg:
+        type: string
+        example: success
+        description: result message
+      trackingId:
+        type: string
+        example: 0af7651916cd43dd8448eb211c80319c
+        description: trace id
+    title: Result«OpenAgentProjectVo»
+    description: result object
+  Result«OpenClipVo»:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        example: 0
+        description: result code
+      data:
+        $ref: '#/definitions/OpenClipVo'
+      msg:
+        type: string
+        example: success
+        description: result message
+      trackingId:
+        type: string
+        example: 0af7651916cd43dd8448eb211c80319c
+        description: trace id
+    title: Result«OpenClipVo»
+    description: result object
+  Result«OpenTeamspaceVo»:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        example: 0
+        description: result code
+      data:
+        $ref: '#/definitions/OpenTeamspaceVo'
+      msg:
+        type: string
+        example: success
+        description: result message
+      trackingId:
+        type: string
+        example: 0af7651916cd43dd8448eb211c80319c
+        description: trace id
+    title: Result«OpenTeamspaceVo»
+    description: result object
+  Result«OpenUploadResourceParamVo»:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        example: 0
+        description: result code
+      data:
+        $ref: '#/definitions/OpenUploadResourceParamVo'
+      msg:
+        type: string
+        example: success
+        description: result message
+      trackingId:
+        type: string
+        example: 0af7651916cd43dd8448eb211c80319c
+        description: trace id
+    title: Result«OpenUploadResourceParamVo»
+    description: result object
+  Result«OpenUserVo»:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        example: 0
+        description: result code
+      data:
+        $ref: '#/definitions/OpenUserVo'
+      msg:
+        type: string
+        example: success
+        description: result message
+      trackingId:
+        type: string
+        example: 0af7651916cd43dd8448eb211c80319c
+        description: trace id
+    title: Result«OpenUserVo»
+    description: result object
+  Result«OpenWorkspaceCreditVo»:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        example: 0
+        description: result code
+      data:
+        $ref: '#/definitions/OpenWorkspaceCreditVo'
+      msg:
+        type: string
+        example: success
+        description: result message
+      trackingId:
+        type: string
+        example: 0af7651916cd43dd8448eb211c80319c
+        description: trace id
+    title: Result«OpenWorkspaceCreditVo»
+    description: result object
+  Result«OpenWorkspaceVo»:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        example: 0
+        description: result code
+      data:
+        $ref: '#/definitions/OpenWorkspaceVo'
+      msg:
+        type: string
+        example: success
+        description: result message
+      trackingId:
+        type: string
+        example: 0af7651916cd43dd8448eb211c80319c
+        description: trace id
+    title: Result«OpenWorkspaceVo»
     description: result object
   Result«PageData«ClipInfoVo»»:
     type: object
@@ -3317,7 +2886,7 @@ definitions:
         description: trace id
     title: Result«PageData«ClipInfoVo»»
     description: result object
-  Result«PageData«ProjectVo»»:
+  Result«PageData«OpenAgentProjectVo»»:
     type: object
     properties:
       code:
@@ -3326,7 +2895,7 @@ definitions:
         example: 0
         description: result code
       data:
-        $ref: '#/definitions/PageData«ProjectVo»'
+        $ref: '#/definitions/PageData«OpenAgentProjectVo»'
       msg:
         type: string
         example: success
@@ -3335,9 +2904,9 @@ definitions:
         type: string
         example: 0af7651916cd43dd8448eb211c80319c
         description: trace id
-    title: Result«PageData«ProjectVo»»
+    title: Result«PageData«OpenAgentProjectVo»»
     description: result object
-  Result«ProjectAssetVo»:
+  Result«PageData«OpenClipVo»»:
     type: object
     properties:
       code:
@@ -3346,7 +2915,7 @@ definitions:
         example: 0
         description: result code
       data:
-        $ref: '#/definitions/ProjectAssetVo'
+        $ref: '#/definitions/PageData«OpenClipVo»'
       msg:
         type: string
         example: success
@@ -3355,107 +2924,7 @@ definitions:
         type: string
         example: 0af7651916cd43dd8448eb211c80319c
         description: trace id
-    title: Result«ProjectAssetVo»
-    description: result object
-  Result«ProjectVo»:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-        example: 0
-        description: result code
-      data:
-        $ref: '#/definitions/ProjectVo'
-      msg:
-        type: string
-        example: success
-        description: result message
-      trackingId:
-        type: string
-        example: 0af7651916cd43dd8448eb211c80319c
-        description: trace id
-    title: Result«ProjectVo»
-    description: result object
-  Result«TeamspaceInfoVo»:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-        example: 0
-        description: result code
-      data:
-        $ref: '#/definitions/TeamspaceInfoVo'
-      msg:
-        type: string
-        example: success
-        description: result message
-      trackingId:
-        type: string
-        example: 0af7651916cd43dd8448eb211c80319c
-        description: trace id
-    title: Result«TeamspaceInfoVo»
-    description: result object
-  Result«UploadAssetParamVo»:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-        example: 0
-        description: result code
-      data:
-        $ref: '#/definitions/UploadAssetParamVo'
-      msg:
-        type: string
-        example: success
-        description: result message
-      trackingId:
-        type: string
-        example: 0af7651916cd43dd8448eb211c80319c
-        description: trace id
-    title: Result«UploadAssetParamVo»
-    description: result object
-  Result«UserVo»:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-        example: 0
-        description: result code
-      data:
-        $ref: '#/definitions/UserVo'
-      msg:
-        type: string
-        example: success
-        description: result message
-      trackingId:
-        type: string
-        example: 0af7651916cd43dd8448eb211c80319c
-        description: trace id
-    title: Result«UserVo»
-    description: result object
-  Result«WorkspaceInfoVo»:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-        example: 0
-        description: result code
-      data:
-        $ref: '#/definitions/WorkspaceInfoVo'
-      msg:
-        type: string
-        example: success
-        description: result message
-      trackingId:
-        type: string
-        example: 0af7651916cd43dd8448eb211c80319c
-        description: trace id
-    title: Result«WorkspaceInfoVo»
+    title: Result«PageData«OpenClipVo»»
     description: result object
   Result«int»:
     type: object
@@ -3491,112 +2960,6 @@ definitions:
           - private
           - restrictedAccess
     title: ShareInfo
-  TeamspaceInfoVo:
-    type: object
-    properties:
-      accessScope:
-        type: string
-        enum:
-          - closed
-          - default
-          - open
-          - private
-          - special private
-      allowMemberInvite:
-        type: boolean
-      capabilities:
-        type: object
-        additionalProperties:
-          type: boolean
-      createdAt:
-        type: string
-        format: date-time
-      creatorUuid:
-        type: string
-      description:
-        type: string
-      isDefault:
-        type: boolean
-      isPrivate:
-        type: boolean
-      joinTime:
-        type: string
-        format: date-time
-      memberCount:
-        type: integer
-        format: int32
-      members:
-        type: array
-        items:
-          $ref: '#/definitions/TeamspaceMemberVo'
-      modifiedAt:
-        type: string
-        format: date-time
-      name:
-        type: string
-      ownerCount:
-        type: integer
-        format: int32
-      owners:
-        type: array
-        items:
-          $ref: '#/definitions/TeamspaceMemberVo'
-      role:
-        type: string
-        enum:
-          - guest
-          - member
-          - owner
-      status:
-        type: string
-        enum:
-          - active
-          - created
-          - deleted
-          - inactive
-          - trashed
-      teamspaceUuid:
-        type: string
-      workspaceName:
-        type: string
-      workspaceUuid:
-        type: string
-    title: TeamspaceInfoVo
-    description: Teamspace Basic Information
-  TeamspaceMemberVo:
-    type: object
-    properties:
-      joinTime:
-        type: string
-        format: date-time
-      leaveTime:
-        type: string
-        format: date-time
-      role:
-        type: string
-        enum:
-          - guest
-          - member
-          - owner
-      status:
-        type: string
-        enum:
-          - active
-          - created
-          - deleted
-          - inactive
-          - trashed
-      teamspaceUuid:
-        type: string
-      userAvatar:
-        type: string
-      userEmail:
-        type: string
-      userName:
-        type: string
-      userUuid:
-        type: string
-    title: TeamspaceMemberVo
   TeamspaceSimpleInfoVo:
     type: object
     properties:
@@ -3630,94 +2993,6 @@ definitions:
         type: string
     title: TeamspaceSimpleInfoVo
     description: Teamspace Simple Information
-  TimePeriod:
-    type: object
-    properties:
-      end:
-        type: integer
-        format: int32
-        minimum: 0
-        exclusiveMinimum: false
-      start:
-        type: integer
-        format: int32
-        minimum: 0
-        exclusiveMinimum: false
-    title: TimePeriod
-  UploadAssetParamVo:
-    type: object
-    properties:
-      resourceUuid:
-        type: string
-        example: abc
-        description: The Asset UUID.
-      uploadUrl:
-        type: string
-        example: 'http://api.visla.us/xxxxx.mp4'
-        description: The URL to upload this Assets.
-    title: UploadAssetParamVo
-    description: The request body of Upload Assets to a Project.
-  UserOrgInfoVo:
-    type: object
-    properties:
-      isOrgAdmin:
-        type: boolean
-      isOrgUser:
-        type: boolean
-      orgName:
-        type: string
-      orgUuid:
-        type: string
-      status:
-        type: integer
-        format: int32
-    title: UserOrgInfoVo
-  UserQuotaVo:
-    type: object
-    properties:
-      aiCaptionTimeLimit:
-        type: integer
-        format: int64
-      aiCaptionTimeUsed:
-        type: integer
-        format: int64
-      aiTextCharsLimit:
-        type: integer
-        format: int64
-      aiTextCharsUsed:
-        type: integer
-        format: int64
-      creationTimeLimit:
-        type: integer
-        format: int64
-      creationTimeUsed:
-        type: integer
-        format: int64
-      privateStockTimeLimit:
-        type: integer
-        format: int64
-      privateStockTimeUsed:
-        type: integer
-        format: int64
-      storageLimit:
-        type: integer
-        format: int64
-      storageUsed:
-        type: integer
-        format: int64
-      syntheticVoiceCharsLimit:
-        type: integer
-        format: int64
-      syntheticVoiceCharsUsed:
-        type: integer
-        format: int64
-      transcriptionTimeLimit:
-        type: integer
-        format: int64
-      transcriptionTimeUsed:
-        type: integer
-        format: int64
-    title: UserQuotaVo
   UserSimpleInfoVo:
     type: object
     properties:
@@ -3730,112 +3005,6 @@ definitions:
       userUuid:
         type: string
     title: UserSimpleInfoVo
-  UserVo:
-    type: object
-    properties:
-      aiImageEnabled:
-        type: boolean
-      avatar:
-        type: string
-      createdAt:
-        type: integer
-        format: int64
-        example: 1600000000000
-        description: The create time of this record
-      defaultWorkspaceUuid:
-        type: string
-      devInfo:
-        type: string
-      devType:
-        type: string
-        enum:
-          - android
-          - ios
-          - mac
-          - web_client
-          - web_portal
-          - windows
-      email:
-        type: string
-      emailDomain:
-        type: string
-      familyName:
-        type: string
-      feePlan:
-        $ref: '#/definitions/FeePlanVo'
-      givenName:
-        type: string
-      isSSOUser:
-        type: boolean
-      loginTime:
-        type: integer
-        format: int64
-        example: 1600000000000
-        description: The login time
-      macAddress:
-        type: string
-      mobile:
-        type: string
-      modifiedAt:
-        type: integer
-        format: int64
-        example: 1600000000000
-        description: The update timestamp.
-      myTeamspaceUuid:
-        type: string
-      notificationUrl:
-        type: string
-      orgInfo:
-        $ref: '#/definitions/UserOrgInfoVo'
-      orgName:
-        type: string
-      orgUuid:
-        type: string
-      pwdEnabled:
-        type: boolean
-      quota:
-        $ref: '#/definitions/UserQuotaVo'
-      refreshToken:
-        type: string
-      regTime:
-        type: integer
-        format: int64
-        example: 1600000000000
-        description: The register time
-      regType:
-        type: string
-        enum:
-          - apple_oauth
-          - email_password
-          - google_oauth
-          - sso_oauth
-      termsAgreed:
-        type: boolean
-      termsUrl:
-        type: string
-      thirdpartyUuid:
-        type: string
-      tokenExpireAt:
-        type: integer
-        format: int64
-        example: 1600000000000
-        description: The token of expireAt
-      userStatus:
-        type: string
-        enum:
-          - active
-          - disabled
-          - inactive
-      userUuid:
-        type: string
-      vipTempUser:
-        type: boolean
-      visToken:
-        type: string
-      workEmailFlag:
-        type: boolean
-    title: UserVo
-    description: Basic information of the user
   Watermark:
     type: object
     properties:
@@ -3848,121 +3017,5 @@ definitions:
       watermarkLink:
         type: string
     title: Watermark
-  WorkspaceInfoVo:
-    type: object
-    properties:
-      addonPlans:
-        type: array
-        items:
-          $ref: '#/definitions/FeePlanVo'
-      allowFindByDomain:
-        type: boolean
-      allowMemberInvite:
-        type: boolean
-      asrEnabled:
-        type: boolean
-      asrModel:
-        type: string
-        enum:
-          - basic
-          - premium
-      avatar:
-        type: string
-      billingEmail:
-        type: string
-      capabilities:
-        type: object
-        additionalProperties:
-          type: boolean
-      createTsEnabled:
-        type: boolean
-      createdAt:
-        type: string
-        format: date-time
-      creatorUuid:
-        type: string
-      description:
-        type: string
-      emailDomains:
-        type: array
-        items:
-          type: string
-      feePlan:
-        $ref: '#/definitions/FeePlanVo'
-      inviteLink:
-        type: string
-      inviteLinkEnabled:
-        type: boolean
-      joinTime:
-        type: string
-        format: date-time
-      memberCount:
-        type: integer
-        format: int32
-      memberRole:
-        type: string
-        enum:
-          - guest
-          - member
-          - owner
-      modifiedAt:
-        type: string
-        format: date-time
-      monthlyCredit:
-        type: integer
-        format: int32
-      myTeamspace:
-        $ref: '#/definitions/TeamspaceSimpleInfoVo'
-      name:
-        type: string
-      orgInfo:
-        $ref: '#/definitions/OrgInfo'
-      orgName:
-        type: string
-      orgUuid:
-        type: string
-      permissions:
-        type: array
-        items:
-          $ref: '#/definitions/WorkspacePermissionVo'
-      soleSpaceHandleOption:
-        type: string
-        enum:
-          - delete
-          - transfer
-      status:
-        type: string
-        enum:
-          - active
-          - created
-          - deleted
-          - inactive
-          - trashed
-      teamspaceCount:
-        type: integer
-        format: int32
-      workspaceUuid:
-        type: string
-    title: WorkspaceInfoVo
-    description: Workspace Detail Information
-  WorkspacePermissionVo:
-    type: object
-    properties:
-      maxOptionValue:
-        type: string
-      minOptionValue:
-        type: string
-      optionIsEnabled:
-        type: boolean
-      optionIsLocked:
-        type: boolean
-      optionIsVisible:
-        type: boolean
-      optionName:
-        type: string
-      optionValue:
-        type: string
-      workspaceUuid:
-        type: string
-    title: WorkspacePermissionVo
-    description: Workspace Permission
+
+
